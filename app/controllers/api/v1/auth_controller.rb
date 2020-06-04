@@ -1,7 +1,7 @@
 class Api::V1::AuthController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:artist_login]
 
-  def create
+  def artist_login
     @artist = Artist.find_by(name: artist_login_params[:name])
     if @artist && @artist.authenticate(artist_login_params[:password])
       token = encode_token({ artist_id: @artist.id })

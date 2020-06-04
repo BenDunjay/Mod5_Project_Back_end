@@ -10,6 +10,10 @@ class Api::V1::ArtistsController < ApplicationController
     end
   end
 
+  def index
+    render json: { artists: Artist.all }
+  end
+
   def profile
     @artist = Artist.find(params[:id])
     render json: { artist: ArtistSerializer.new(@artist) }
