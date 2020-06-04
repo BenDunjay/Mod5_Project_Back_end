@@ -19,6 +19,9 @@ class Api::V1::ArtistsController < ApplicationController
     render json: { artist: ArtistSerializer.new(@artist) }
   end
 
+  def edit_profile
+  end
+
   private
 
   def artist_params
