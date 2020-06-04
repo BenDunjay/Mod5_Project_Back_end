@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
 
   def decoded_token
     if auth_header
-      token = auth_header.split(" ")[1]
+      token = auth_header
       begin
         return JWT.decode(token, @secret)[0]
       rescue JWT::DecodeError
@@ -38,6 +38,8 @@ class ApplicationController < ActionController::API
   end
 
   def authorized
-    render json: { message: "Please log in" }, status: :unauthorized unless logged_in?
+    if !logged_in?
+      render json: { message: "Please log in" }, status: :unauthorized
+    end
   end
 end
