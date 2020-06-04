@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   before_action :authorized
 
   def initialize
-    @secret = ENV["RAILS_AUTH_TEST_SECRET_KEY"]
+    @secret = ENV["ENV_VAR"]
   end
 
   def auth_header
