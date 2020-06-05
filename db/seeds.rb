@@ -8,3 +8,14 @@
 #
 
 # rails g resource availability date:date artist:references
+
+Availability.delete_all
+Artist.delete_all
+
+a1 = Artist.create(name: "Ben", password: "123")
+a2 = Artist.create(name: "Benny", password: "123")
+
+date1 = Availability.create(date: "2020-06-08", artist_id: a1.id)
+date2 = Availability.create(date: "2020-06-09", artist_id: a2.id)
+date3 = Availability.create(date: "2020-06-12", artist_id: a1.id)
+date4 = Availability.create(date: "2020-06-13", artist_id: a1.id)
