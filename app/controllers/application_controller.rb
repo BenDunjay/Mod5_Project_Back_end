@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :authorized
+  before_action :artist_authorized, :venue_authorized
 
   def initialize
     @secret = ENV["ENV_VAR"]
@@ -33,12 +33,31 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def logged_in?
+  def current_venue
+    if decoded_token
+      venue_id = decoded_token["venue_id"]
+      @venue = Venue.find_by(id: venue_id)
+    else
+      nil
+    end
+  end
+
+  def artist_logged_in?
     !!current_artist
   end
 
-  def authorized
-    if !logged_in?
+  def venue_logged_in?
+    !!current_venue
+  end
+
+  def artist_authorized
+    if !artist_logged_in?
+      render json: { message: "Please log in" }, status: :unauthorized
+    end
+  end
+
+  def venue_authorized
+    if !venue_logged_in?
       render json: { message: "Please log in" }, status: :unauthorized
     end
   end
