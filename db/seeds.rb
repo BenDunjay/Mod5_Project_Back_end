@@ -19,3 +19,5 @@ date1 = Availability.create(date: "2020-06-08", artist_id: a1.id)
 date2 = Availability.create(date: "2020-06-09", artist_id: a2.id)
 date3 = Availability.create(date: "2020-06-12", artist_id: a1.id)
 date4 = Availability.create(date: "2020-06-13", artist_id: a1.id)
+
+# rails g resource Venue name
