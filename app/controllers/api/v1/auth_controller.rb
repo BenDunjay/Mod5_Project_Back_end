@@ -1,5 +1,5 @@
 class Api::V1::AuthController < ApplicationController
-  skip_before_action :artist_authorized, :venue_authorized, only: [:artist_login, :venue_login]
+  # skip_before_action :artist_authorized, :venue_authorized, only: [:artist_login, :venue_login]
 
   def artist_login
     @artist = Artist.find_by(name: artist_login_params[:name])

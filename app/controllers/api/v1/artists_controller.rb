@@ -1,5 +1,5 @@
 class Api::V1::ArtistsController < ApplicationController
-  skip_before_action :artist_authorized, only: [:create]
+  # skip_before_action :artist_authorized, :venue_authorized, only: [:create]
 
   def create
     @artist = Artist.create(artist_params)
