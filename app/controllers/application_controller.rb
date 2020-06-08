@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :artist_authorized, :venue_authorized
+  # before_action :artist_authorized, :venue_authorized
 
   def initialize
     @secret = ENV["ENV_VAR"]
@@ -14,6 +14,7 @@ class ApplicationController < ActionController::API
   end
 
   def decoded_token
+    byebug
     if auth_header
       token = auth_header
       begin
@@ -25,11 +26,12 @@ class ApplicationController < ActionController::API
   end
 
   def current_artist
+    byebug
     if decoded_token
       artist_id = decoded_token["artist_id"]
       @artist = Artist.find_by(id: artist_id)
-    else
-      nil
+      byebug
+    elsif nil
     end
   end
 
