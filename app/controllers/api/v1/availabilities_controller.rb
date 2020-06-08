@@ -7,7 +7,7 @@ class Api::V1::AvailabilitiesController < ApplicationController
   def create_availability
     @availability = Availability.create(availability_params)
     if @availability.valid?
-      render json: { availability: AvailabilitySerializer.new(@availability) }, status: :created
+      render json: @availability, serializer: AvailabilitySerializer, status: :created
     else
       render json: { error: "failed to create availability" }, status: :not_acceptable
     end

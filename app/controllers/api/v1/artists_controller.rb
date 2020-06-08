@@ -1,6 +1,12 @@
 class Api::V1::ArtistsController < ApplicationController
   # skip_before_action :artist_authorized, :venue_authorized, only: [:create]
 
+  def all_artists
+    @artists = Artist.all
+    byebug
+    render json: @artists, each_serializer: ArtistSerializer
+  end
+
   def create
     @artist = Artist.create(artist_params)
     if @artist.valid?

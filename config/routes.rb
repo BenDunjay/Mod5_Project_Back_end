@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       patch "/edit_profile", to: "artists#edit_profile"
       post "/create_availability", to: "availabilities#create_availability"
       post "/venue_login", to: "auth#venue_login"
+      get "/all_artists", to: "artists#all_artists"
     end
   end
 end
