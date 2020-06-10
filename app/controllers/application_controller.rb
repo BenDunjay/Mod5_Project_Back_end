@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  # before_action :artist_authorized, :venue_authorized
+  # before_action :authorized
 
   def initialize
     @secret = ENV["ENV_VAR"]
@@ -14,7 +14,6 @@ class ApplicationController < ActionController::API
   end
 
   def decoded_token
-    byebug
     if auth_header
       token = auth_header
       begin
@@ -25,42 +24,35 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def current_artist
-    byebug
-    if decoded_token
-      artist_id = decoded_token["artist_id"]
-      @artist = Artist.find_by(id: artist_id)
-      byebug
-    elsif nil
-    end
-  end
-
-  def current_venue
-    if decoded_token
-      venue_id = decoded_token["venue_id"]
-      @venue = Venue.find_by(id: venue_id)
+  def logged_in_user
+    user_info = decoded_token
+    if user_info && user_info["artist"]
+      Artist.find(user_info["id"])
+    elsif user_info && !user_info["artist"]
+      Venue.find(user_info["id"])
     else
       nil
     end
   end
 
-  def artist_logged_in?
-    !!current_artist
-  end
-
-  def venue_logged_in?
-    !!current_venue
-  end
-
-  def artist_authorized
-    if !artist_logged_in?
+  def authorized
+    if !logged_in_user
       render json: { message: "Please log in" }, status: :unauthorized
     end
   end
 
+  def artist_authorized
+    user = logged_in_user
+
+    if !user || user.class != Artist
+      render json: { message: "You are not authorized to perform this action" }, status: :unauthorized
+    end
+  end
+
   def venue_authorized
-    if !venue_logged_in?
-      render json: { message: "Please log in" }, status: :unauthorized
+    user = logged_in_user
+    if user && user.class != Venue
+      render json: { message: "You are not authorized to perform this action" }, status: :unauthorized
     end
   end
 end

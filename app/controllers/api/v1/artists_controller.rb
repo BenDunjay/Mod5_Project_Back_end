@@ -1,9 +1,10 @@
 class Api::V1::ArtistsController < ApplicationController
-  # skip_before_action :artist_authorized, :venue_authorized, only: [:create]
+  before_action :authorized, only: [:profile]
+  before_action :venue_authorized, only: [:all_artists]
+  before_action :artist_authorized, only: [:edit_profile]
 
   def all_artists
     @artists = Artist.all
-    byebug
     render json: @artists, each_serializer: ArtistSerializer
   end
 
@@ -17,12 +18,12 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def profile
-    @artist = Artist.find_by(id: params[:id])
-    render json: { artist: ArtistSerializer.new(@artist) }
+    @artist = Artist.find_by(name: params[:name])
+    render json: @artist, serializer: ArtistSerializer
   end
 
   def edit_profile
-    @artist = current_artist
+    @artist = logged_in_user
     @artist.update(artist_params)
     render json: { artist: ArtistSerializer.new(@artist) }
   end

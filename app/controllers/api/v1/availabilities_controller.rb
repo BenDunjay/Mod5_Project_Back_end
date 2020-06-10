@@ -1,11 +1,8 @@
 class Api::V1::AvailabilitiesController < ApplicationController
-  def index
-    availability = Availability.all
-    render json: availabilities, include: [:artists]
-  end
+  before_action :artist_authorized, only: [:create_availability]
 
   def create_availability
-    @availability = Availability.create(availability_params)
+    @availability = Availability.create(date: params[:date], artist: logged_in_user)
     if @availability.valid?
       render json: @availability, serializer: AvailabilitySerializer, status: :created
     else
