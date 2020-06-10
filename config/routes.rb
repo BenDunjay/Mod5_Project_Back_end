@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  resources :requests
   namespace :api do
     namespace :v1 do
       resources :venues
       resources :availabilities
       resources :artists, only: [:create]
       post "/artist_login", to: "auth#artist_login"
-      get "/profile", to: "artists#profile"
+      get "/profile/:name", to: "artists#profile"
       patch "/edit_profile", to: "artists#edit_profile"
       post "/create_availability", to: "availabilities#create_availability"
       post "/venue_login", to: "auth#venue_login"

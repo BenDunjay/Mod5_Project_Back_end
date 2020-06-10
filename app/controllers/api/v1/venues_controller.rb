@@ -1,5 +1,5 @@
 class Api::V1::VenuesController < ApplicationController
-  # skip_before_action :venue_authorized, :artist_authorized, only: [:create]
+  # skip_before_action :venue_authorized, only: [:create]
 
   def create
     @venue = Venue.create(venue_params)

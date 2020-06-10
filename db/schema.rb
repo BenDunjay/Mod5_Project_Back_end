@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_06_142336) do
+ActiveRecord::Schema.define(version: 2020_06_09_182250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 2020_06_06_142336) do
     t.index ["artist_id"], name: "index_availabilities_on_artist_id"
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.integer "payment"
+    t.integer "number_of_hours"
+    t.bigint "venue_id", null: false
+    t.bigint "availability_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["availability_id"], name: "index_requests_on_availability_id"
+    t.index ["venue_id"], name: "index_requests_on_venue_id"
+  end
+
   create_table "venues", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
@@ -38,4 +49,6 @@ ActiveRecord::Schema.define(version: 2020_06_06_142336) do
   end
 
   add_foreign_key "availabilities", "artists"
+  add_foreign_key "requests", "availabilities"
+  add_foreign_key "requests", "venues"
 end
