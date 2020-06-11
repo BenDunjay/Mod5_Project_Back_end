@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       post "/create_availability", to: "availabilities#create_availability"
       post "/venue_login", to: "auth#venue_login"
       get "/all_artists", to: "artists#all_artists"
+      get "/get_availability/:id", to: "availabilities#get_availability"
+      post "/create_request", to: "requests#create_request"
     end
   end
 end
