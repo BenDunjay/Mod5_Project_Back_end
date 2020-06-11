@@ -1,6 +1,8 @@
 class RequestsController < ApplicationController
+  before_action :venue_authorized, only: [:create_request]
+
   def create_request
-    @request = Request.create(request_params)
+    @request = Request.create(request_params, venue: logged_in_user)
     if @request.valid?
       render json: @request, serializer: RequestSerializer, status: :created
     else
@@ -11,6 +13,6 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:payment, :number_of_hours, :availability_id, :venue_id)
+    params.require(:request).permit(:payment, :number_of_hours, :availability_id)
   end
 end

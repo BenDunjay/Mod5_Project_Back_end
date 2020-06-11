@@ -10,9 +10,14 @@ class Api::V1::AvailabilitiesController < ApplicationController
     end
   end
 
+  def get_availability
+    @availability = Availability.find_by(id: params[:id])
+    render json: @availability, serializer: AvailabilitySerializer
+  end
+
   private
 
   def availability_params
-    params.require(:availability).permit(:date, :artist_id)
+    params.require(:availability).permit(:date)
   end
 end
