@@ -1,8 +1,8 @@
-class RequestsController < ApplicationController
+class Api::V1::RequestsController < ApplicationController
   before_action :venue_authorized, only: [:create_request]
 
   def create_request
-    @request = Request.create(request_params, venue: logged_in_user)
+    @request = Request.create(payment: params[:payment], number_of_hours: params[:number_of_hours], availability_id: params[:availability_id], venue: logged_in_user)
     if @request.valid?
       render json: @request, serializer: RequestSerializer, status: :created
     else
