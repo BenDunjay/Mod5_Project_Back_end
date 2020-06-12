@@ -5,4 +5,8 @@ class Request < ApplicationRecord
   def date
     self.availability.date
   end
+
+  def name
+    self.venue.name
+  end
 end
