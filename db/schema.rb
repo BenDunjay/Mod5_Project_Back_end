@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_182250) do
   create_table "requests", force: :cascade do |t|
     t.integer "payment"
     t.integer "number_of_hours"
+    t.boolean "accept"
     t.bigint "venue_id", null: false
     t.bigint "availability_id", null: false
     t.datetime "created_at", precision: 6, null: false
