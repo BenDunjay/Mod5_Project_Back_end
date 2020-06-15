@@ -9,4 +9,12 @@ class Request < ApplicationRecord
   def name
     self.venue.name
   end
+
+  def postcode
+    self.venue.postcode
+  end
+
+  def phone_number
+    self.venue.phone_number
+  end
 end

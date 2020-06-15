@@ -1,5 +1,4 @@
 class ArtistSerializer < ActiveModel::Serializer
-  attributes :name, :id
+  attributes :name, :id, :username, :email_address, :artist_genre, :bio, :phone_number, :instagram, :spotify, :profile_picture
   has_many :availabilities
-  has_many :requests, through: :availabilties
 end
