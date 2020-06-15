@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       get "/all_artists", to: "artists#all_artists"
       get "/get_availability/:id", to: "availabilities#get_availability"
       post "/create_request", to: "requests#create_request"
+      patch "/accept_or_reject/:id", to: "requests#accept_or_reject"
+      get "/all_bookings", to: "requests#all_bookings"
     end
   end
 end

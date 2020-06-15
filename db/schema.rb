@@ -17,6 +17,14 @@ ActiveRecord::Schema.define(version: 2020_06_09_182250) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
+    t.string "username"
+    t.string "email_address"
+    t.string "artist_genre"
+    t.text "bio"
+    t.string "phone_number"
+    t.string "instagram"
+    t.string "spotify"
+    t.string "profile_picture"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -34,6 +42,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_182250) do
     t.integer "payment"
     t.integer "number_of_hours"
     t.boolean "accept"
+    t.time "start_time"
     t.bigint "venue_id", null: false
     t.bigint "availability_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -44,6 +53,12 @@ ActiveRecord::Schema.define(version: 2020_06_09_182250) do
 
   create_table "venues", force: :cascade do |t|
     t.string "name"
+    t.string "email_address"
+    t.string "postcode"
+    t.text "bio"
+    t.string "website_lin"
+    t.string "instagram"
+    t.string "phone_number"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

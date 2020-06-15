@@ -4,6 +4,7 @@ class CreateRequests < ActiveRecord::Migration[6.0]
       t.integer :payment
       t.integer :number_of_hours
       t.boolean :accept, default: nil
+      t.time :start_time
       t.references :venue, null: false, foreign_key: true
       t.references :availability, null: false, foreign_key: true
 
