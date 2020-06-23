@@ -24,13 +24,15 @@ class Api::V1::ArtistsController < ApplicationController
 
   def edit_profile
     @artist = logged_in_user
+    byebug
     @artist.update(artist_params)
+    byebug
     render json: { artist: ArtistSerializer.new(@artist) }
   end
 
   private
 
   def artist_params
-    params.require(:artist).permit(:name, :password)
+    params.require(:artist).permit(:name, :password, :bio, :instagram, :spotify, :username, :profile_picture, :phone_number, :artist_genre, :email_address)
   end
 end
