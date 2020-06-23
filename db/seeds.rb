@@ -34,5 +34,7 @@ date4 = Availability.create(date: "2020-06-21", artist_id: a1.id)
 date4 = Availability.create(date: "2020-12-26", artist_id: a1.id)
 
 b1 = Venue.create(name: "Strathcona", password: "123", postcode: "H3Y 2ZN", phone_number: "07777 777777")
+b2 = Venue.create(name: "Electic Bicycle Brewery", password: "123", postcode: "H3Y 1QT", phone_number: "07777 666777")
+b1 = Venue.create(name: "FoxTown", password: "123", postcode: "H3Y 3FN", phone_number: "07777 888777")
 
 # rails g resource Venue name
