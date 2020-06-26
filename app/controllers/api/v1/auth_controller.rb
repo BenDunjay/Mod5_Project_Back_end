@@ -2,7 +2,7 @@ class Api::V1::AuthController < ApplicationController
   # skip_before_action :authorized, only: [:artist_login, :venue_login]
 
   def artist_login
-    @artist = Artist.find_by(name: artist_login_params[:name])
+    @artist = Artist.find_by(username: artist_login_params[:username])
     if @artist && @artist.authenticate(artist_login_params[:password])
       token = encode_token({ id: @artist.id, artist: true })
       render json: { artist: ArtistSerializer.new(@artist), jwt: token }
@@ -24,7 +24,7 @@ class Api::V1::AuthController < ApplicationController
   private
 
   def artist_login_params
-    params.require(:artist).permit(:name, :password)
+    params.require(:artist).permit(:username, :password)
   end
 
   def venue_login_params
