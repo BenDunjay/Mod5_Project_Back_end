@@ -24,4 +24,8 @@ class Artist < ApplicationRecord
 
     result
   end
+
+  # def sort_requests(array) ## sort each array so can be displayed by date order in tables.
+  #   array.sort_by(&:request_id)
+  # end
 end

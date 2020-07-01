@@ -9,12 +9,9 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def create
-    @byebug
     @artist = Artist.create(artist_params)
-    byebug
     if @artist.valid?
-      byebug
-      render json: { artist: ArtistSerializer.new(@artist) }, status: :created
+      render json: @artist, serializer: ArtistSerializer, status: :created
     else
       render json: { error: "failed to create artist" }, status: :not_acceptable
     end
@@ -27,9 +24,7 @@ class Api::V1::ArtistsController < ApplicationController
 
   def edit_profile
     @artist = logged_in_user
-    byebug
     @artist.update(artist_params)
-    byebug
     render json: { artist: ArtistSerializer.new(@artist) }
   end
 
