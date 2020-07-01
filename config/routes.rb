@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :requests
   namespace :api do
     namespace :v1 do
       resources :venues
+      resources :requests
       resources :availabilities
       resources :artists, only: [:create]
       post "/artist_login", to: "auth#artist_login"

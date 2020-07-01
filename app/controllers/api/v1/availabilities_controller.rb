@@ -15,9 +15,14 @@ class Api::V1::AvailabilitiesController < ApplicationController
     render json: @availability, serializer: AvailabilitySerializer
   end
 
+  def destroy
+    @availability = Availability.find_by(id: params[:id])
+    byebug
+  end
+
   private
 
   def availability_params
-    params.require(:availability).permit(:date)
+    params.require(:availability).permit(:date, :id)
   end
 end
