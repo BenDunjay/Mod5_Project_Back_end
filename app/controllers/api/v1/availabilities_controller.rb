@@ -17,7 +17,6 @@ class Api::V1::AvailabilitiesController < ApplicationController
 
   def destroy
     @availability = Availability.find_by(id: params[:id])
-    byebug
     @availability.destroy
   end
 
