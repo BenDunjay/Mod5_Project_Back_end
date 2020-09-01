@@ -11,6 +11,19 @@ class Api::V1::AuthController < ApplicationController
     end
   end
 
+  def refresh
+    token = decoded_token
+    if token["artist"] == true
+      @artist = Artist.find_by(id: token["id"])
+      token = encode_token({ id: @artist.id, artist: true })
+      render json: { artist: ArtistSerializer.new(@artist), jwt: token }
+    elsif token["artist"] == false
+      @venue = Venue.find_by(id: token["id"])
+      token = encode_token({ id: @venue.id, artist: false })
+      render json: { venue: VenueSerializer.new(@venue), jwt: token }
+    end
+  end
+
   def venue_login
     @venue = Venue.find_by(name: venue_login_params[:name])
     if @venue && @venue.authenticate(venue_login_params[:password])

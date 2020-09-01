@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :requests
       resources :availabilities
       resources :artists, only: [:create]
+      get "/authorize", to: "auth#refresh"
       post "/artist_login", to: "auth#artist_login"
       get "/profile/:name", to: "artists#profile"
       patch "/edit_profile", to: "artists#edit_profile"
