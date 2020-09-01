@@ -3,11 +3,13 @@ class Api::V1::RequestsController < ApplicationController
   before_action :artist_authorized, only: [:accept_or_reject]
   before_action :authorized, only: [:all_bookings]
 
+  #will take the logged in user and pass the my_requests method. This method separates the requests and passes them through the serializer to make them neater with the necessary details.
   def all_bookings
     @requests = logged_in_user.my_requests
     render json: @requests
   end
 
+  # will create a new request. If the request is valid (meets the criteria to create a request), then it will render
   def create_request
     @request = Request.create(payment: params[:payment], number_of_hours: params[:number_of_hours], availability_id: params[:availability_id], start_time: params[:start_time], venue: logged_in_user)
     if @request.valid?
