@@ -1,6 +1,8 @@
 class Api::V1::AuthController < ApplicationController
   # skip_before_action :authorized, only: [:artist_login, :venue_login]
 
+  #will look to find the artist via the username entered then will compare the artist username and password to see if they match. Will then encode the token. Will then create the artist object including the token
+
   def artist_login
     @artist = Artist.find_by(username: artist_login_params[:username])
     if @artist && @artist.authenticate(artist_login_params[:password])
@@ -10,6 +12,8 @@ class Api::V1::AuthController < ApplicationController
       render json: { message: "invalid name or password" }, status: :unauthorized
     end
   end
+
+  #looks for the key of artist in the decoded token header. If it's true will then look to find the artist by the id passed in the token. Else will look for the venue if it is a venue key.
 
   def refresh
     token = decoded_token
