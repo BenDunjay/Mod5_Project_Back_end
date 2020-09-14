@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  # before_action :authorized
+  # before_action :artist_authorized, :venue_authorized #used to be hashed out to make it all work.
 
   def initialize
     @secret = ENV["ENV_VAR"]
