@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :venues, only: [:create]
       resources :artists, only: [:create]
-
+      resources :availabilities, only: [:destroy]
       controller :artists do
         get "/profile/:name" => :profile
         patch "/edit_profile" => :edit_profile
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       controller :availabilities do
         post "/create_availability" => :create_availability
         get "/get_availability/:id" => :get_availability
+        delete "/delete_booking/:id" => :delete_booking
       end
 
       controller :requests do

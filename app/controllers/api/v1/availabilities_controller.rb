@@ -1,5 +1,5 @@
 class Api::V1::AvailabilitiesController < ApplicationController
-  before_action :artist_authorized, only: [:create_availability]
+  before_action :artist_authorized, only: [:create_availability, :delete_booking]
 
   def create_availability
     @availability = Availability.create(date: params[:date], artist: logged_in_user)
@@ -15,9 +15,11 @@ class Api::V1::AvailabilitiesController < ApplicationController
     render json: @availability, serializer: AvailabilitySerializer
   end
 
-  def destroy
-    @availability = Availability.find_by(id: params[:id])
+  def delete_booking
+    @all_availabilities = logged_in_user.availabilities
+    @availability = @all_availabilities.find_by(id: params[:id])
     @availability.destroy
+    render json: @all_availabilities, serializer: AvailabilitySerializer
   end
 
   private
