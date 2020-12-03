@@ -1,10 +1,18 @@
+require "date"
+
 class Artist < ApplicationRecord
   has_secure_password
   has_many :availabilities
   has_many :requests, through: :availabilities
   validates :username, uniqueness: { case_sensitive: false }
 
+  def future_availabilities
+    today = Date.today
+    self.availabilities.select { |availability| availability.date > today }
+  end
+
   def my_requests
+    byebug
     result = {
       accepted: [],
       rejected: [],
