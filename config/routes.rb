@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :venues, only: [:create]
       resources :artists, only: [:create]
-      resources :availabilities, only: [:destroy]
+      
       controller :artists do
         get "/profile/:name" => :profile
         patch "/edit_profile" => :edit_profile
