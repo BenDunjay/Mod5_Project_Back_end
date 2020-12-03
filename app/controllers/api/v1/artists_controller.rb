@@ -18,14 +18,14 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def profile
-    @artist = Artist.find_by(name: params[:name])
+    @artist = Artist.find_by(id: params[:id])
     render json: @artist, serializer: ArtistSerializer
   end
 
   def edit_profile
-    @artist = logged_in_user
-    @artist.update(artist_params)
-    render json: { artist: ArtistSerializer.new(@artist) }
+    byebug
+    logged_in_user.update(artist_params)
+    render json: logged_in_user, serializer: ArtistSerializer
   end
 
   private
