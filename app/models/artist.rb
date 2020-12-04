@@ -12,7 +12,6 @@ class Artist < ApplicationRecord
   end
 
   def my_requests
-    byebug
     result = {
       accepted: [],
       rejected: [],
@@ -31,6 +30,10 @@ class Artist < ApplicationRecord
     end
 
     result
+  end
+
+  def sort_requests(array)
+    array.sort_by(&:request_id)
   end
 
   # def sort_requests(array) ## sort each array so can be displayed by date order in tables.
