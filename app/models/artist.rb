@@ -18,7 +18,7 @@ class Artist < ApplicationRecord
       pending: [],
     }
 
-    self.requests.each do |request|
+    requests.order(:id).each do |request| 
       serialized_request = RequestSerializer.new(request)
       if request.accept == nil
         result[:pending].push(serialized_request)
@@ -28,15 +28,7 @@ class Artist < ApplicationRecord
         result[:rejected].push(serialized_request)
       end
     end
-
     result
   end
 
-  def sort_requests(array)
-    array.sort_by(&:request_id)
-  end
-
-  # def sort_requests(array) ## sort each array so can be displayed by date order in tables.
-  #   array.sort_by(&:request_id)
-  # end
 end
