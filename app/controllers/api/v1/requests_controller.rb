@@ -5,6 +5,7 @@ class Api::V1::RequestsController < ApplicationController
 
   #will take the logged in user and pass the my_requests method. This method separates the requests and passes them through the serializer to make them neater with the necessary details.
   def all_bookings
+    byebug
     @requests = logged_in_user.my_requests
     render json: @requests
   end

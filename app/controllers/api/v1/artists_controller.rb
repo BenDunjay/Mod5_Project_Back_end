@@ -4,7 +4,7 @@ class Api::V1::ArtistsController < ApplicationController
   before_action :artist_authorized, only: [:edit_profile]
 
   def all_artists
-    @artists = Artist.all
+    @artists = Artist.all.order("RANDOM()")
     render json: @artists, each_serializer: ArtistSerializer
   end
 
@@ -18,7 +18,6 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def profile
-    byebug
     @artist = Artist.find_by(name: params[:name])
     render json: @artist, serializer: ArtistSerializer
   end
